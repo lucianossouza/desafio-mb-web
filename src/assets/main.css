@@ -7,18 +7,21 @@
   font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 8px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+label {
+  margin-bottom: 12px;
+  margin-right: 10px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
 }
 
 @media (min-width: 1024px) {

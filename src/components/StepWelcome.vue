@@ -25,23 +25,3 @@ defineProps({
   }
 });
 </script>
-
-<style>
-.input-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-label {
-  margin-bottom: 12px;
-  margin-right: 10px;
-}
-
-input,
-select {
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-right: 8px;
-}
-</style>
