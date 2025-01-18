@@ -15,6 +15,35 @@ const formData = ref({
   password: { password: "" },
 });
 
+const responseMessage = ref("");
+const isSuccess = ref(false);
+
+async function handleSubmit() {
+  try {
+    const response = await fetch("http://localhost:3000/registration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData.value),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    responseMessage.value = result.message;
+    isSuccess.value = true;
+
+    formData.value = { name: "", email: "", message: "" };
+  } catch (error) {
+    console.error("Erro ao enviar o formulário:", error);
+    responseMessage.value = "Ocorreu um erro ao enviar o formulário.";
+    isSuccess.value = false;
+  }
+}
+
 const nextStep = () => {
   if (currentStep.value < totalSteps - 1) {
     currentStep.value++;
@@ -26,56 +55,60 @@ const prevStep = () => {
     currentStep.value--;
   }
 };
-
-const handleSubmit = () => {
-  console.log("Formulário enviado:", formData.value);
-  alert("Formulário enviado com sucesso!");
-};
 </script>
 
 <template>
   <form @submit.prevent="handleSubmit">
     <div v-if="currentStep === 0">
       <h2>Etapa 1 de 4</h2>
-      <StepWelcome :data="formData.welcome" />
+      <StepWelcome :data="formData.welcome" :handleClick="nextStep" />
     </div>
 
     <div v-if="currentStep === 1">
       <h2>Etapa 2 de 4</h2>
       <StepCpf
         :data="formData.cpf"
+        :handleClick="nextStep"
         v-if="formData.welcome.userType === 'fisica'"
+        :showButton="true"
       />
       <StepCnpj
         :data="formData.cnpj"
+        :handleClick="nextStep"
         v-if="formData.welcome.userType === 'juridica'"
+        :showButton="true"
       />
     </div>
 
     <div v-if="currentStep === 2">
       <h2>Etapa 3 de 4</h2>
-      <StepPassword :data="formData.password" />
+      <StepPassword :data="formData.password" :handleClick="nextStep" />
     </div>
 
     <div v-if="currentStep === 3">
       <h2>Etapa 4 de 4</h2>
       <div class="input-container">
         <label for="email">Endereço de e-mail</label>
-        <input type="email" v-model="email" id="email" />
+        <input type="email" id="email" :value="formData.welcome.email" />
       </div>
       <StepCpf
         :data="formData.cpf"
-        :userType="formData.welcome.userType"
         v-if="formData.welcome.userType === 'fisica'"
+        :showButton="false"
       />
       <StepCnpj
         :data="formData.cnpj"
         v-if="formData.welcome.userType === 'juridica'"
+        :showButton="false"
       />
       <div>
         <div class="input-container">
-          <label for="passwoard">Sua senha</label>
-          <input id="password" type="password" v-model="password" />
+          <label for="password">Sua senha</label>
+          <input
+            id="password"
+            type="password"
+            :value="formData.password.password"
+          />
         </div>
       </div>
     </div>
@@ -88,13 +121,6 @@ const handleSubmit = () => {
         v-if="currentStep > 0"
       >
         Voltar
-      </Button>
-      <Button
-        type="button"
-        v-if="currentStep < totalSteps - 1"
-        :handleClick="nextStep"
-      >
-        Continuar
       </Button>
       <Button type="submit" v-if="currentStep === totalSteps - 1">
         Cadastrar
