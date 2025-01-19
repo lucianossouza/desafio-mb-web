@@ -77,9 +77,10 @@ const prevStep = () => {
     />
 
     <StepCnpj
-      :data="formData.cnpj"
-      :handleClick="nextStep"
       v-if="currentStep === 1 && formData.welcome.userType === 'juridica'"
+      :data="formData.cnpj"
+      :previousButtonClick="prevStep"
+      :nextButtonClick="nextStep"
       :showButton="true"
     />
 
@@ -114,17 +115,8 @@ const prevStep = () => {
       </div>
     </div>
 
-    <div class="buttons">
-      <Button type="submit" v-if="currentStep === totalSteps - 1">
-        Cadastrar
-      </Button>
-    </div>
+    <Button type="submit" v-if="currentStep === totalSteps - 1">
+      Cadastrar
+    </Button>
   </form>
 </template>
-
-<style>
-.buttons {
-  display: flex;
-  gap: 10px;
-}
-</style>

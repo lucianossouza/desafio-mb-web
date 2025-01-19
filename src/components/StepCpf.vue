@@ -23,7 +23,7 @@ defineProps({
       type="text"
       v-model="data.name"
       id="nome"
-      placeholder="Pedro Álvares"
+      placeholder="Digite seu nome"
     />
   </div>
   <div class="input-container">
@@ -66,10 +66,3 @@ defineProps({
     </Button>
   </div>
 </template>
-
-<style scoped>
-.buttons {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-</style>

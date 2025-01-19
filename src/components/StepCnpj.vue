@@ -1,5 +1,6 @@
 <script setup>
 import Button from "./Button.vue";
+import Title from "./Title.vue";
 
 defineProps({
   data: {
@@ -8,19 +9,21 @@ defineProps({
     openDate: String,
     phone: String,
   },
-  handleClick: Function,
+  nextButtonClick: Function,
+  previousButtonClick: Function,
   showButton: Boolean,
 });
 </script>
 
 <template>
+  <Title text="Pessoa Jurídica" />
   <div class="input-container">
     <label for="companyName">Razão social</label>
     <input
       type="text"
       v-model="data.companyName"
       id="companyName"
-      placeholder="00.000.000/0000-00"
+      placeholder="Razão social da empresa"
     />
   </div>
   <div class="input-container">
@@ -43,12 +46,23 @@ defineProps({
       placeholder="15 0000-0000"
     />
   </div>
-  <Button
-    v-if="showButton"
-    type="button"
-    :handleClick="handleClick"
-    :disabled="!data.companyName || !data.cnpj || !data.openDate || !data.phone"
-  >
-    Continuar
-  </Button>
+  <div class="buttons">
+    <Button
+      type="button"
+      :customClass="'btn-secondary'"
+      :handleClick="previousButtonClick"
+    >
+      Voltar
+    </Button>
+    <Button
+      v-if="showButton"
+      type="button"
+      :handleClick="nextButtonClick"
+      :disabled="
+        !data.companyName || !data.cnpj || !data.openDate || !data.phone
+      "
+    >
+      Continuar
+    </Button>
+  </div>
 </template>

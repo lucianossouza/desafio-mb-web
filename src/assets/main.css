@@ -77,6 +77,12 @@ button:disabled {
   color: orange;
 }
 
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+}
+
 @media (min-width: 1024px) {
   body {
     display: flex;
