@@ -63,11 +63,18 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  border: 1px solid orange;
 }
 
 button:disabled {
-  background-color: black;
+  background-color: #000;
   cursor: not-allowed;
+  border-color: #000;
+}
+
+.btn-secondary {
+  background-color: #fff;
+  color: orange;
 }
 
 @media (min-width: 1024px) {

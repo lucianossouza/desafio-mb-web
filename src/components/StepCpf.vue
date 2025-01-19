@@ -1,5 +1,6 @@
 <script setup>
 import Button from "./Button.vue";
+import Title from "./Title.vue";
 
 defineProps({
   data: {
@@ -8,12 +9,14 @@ defineProps({
     birthdate: String,
     phone: String,
   },
-  handleClick: Function,
+  nextButtonClick: Function,
+  previousButtonClick: Function,
   showButton: Boolean,
 });
 </script>
 
 <template>
+  <Title text="Pessoa Física" />
   <div class="input-container">
     <label for="nome">Nome</label>
     <input
@@ -45,12 +48,28 @@ defineProps({
       placeholder="15 99999-9999"
     />
   </div>
-  <Button
-    v-if="showButton"
-    type="button"
-    :handleClick="handleClick"
-    :disabled="!data.name || !data.cpf || !data.birthdate || !data.phone"
-  >
-    Continuar
-  </Button>
+  <div class="buttons">
+    <Button
+      type="button"
+      :customClass="'btn-secondary'"
+      :handleClick="previousButtonClick"
+    >
+      Voltar
+    </Button>
+    <Button
+      v-if="showButton"
+      type="button"
+      :handleClick="nextButtonClick"
+      :disabled="!data.name || !data.cpf || !data.birthdate || !data.phone"
+    >
+      Continuar
+    </Button>
+  </div>
 </template>
+
+<style scoped>
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+</style>

@@ -68,20 +68,20 @@ const prevStep = () => {
       :handleClick="nextStep"
     />
 
-    <div v-if="currentStep === 1">
-      <StepCpf
-        :data="formData.cpf"
-        :handleClick="nextStep"
-        v-if="formData.welcome.userType === 'fisica'"
-        :showButton="true"
-      />
-      <StepCnpj
-        :data="formData.cnpj"
-        :handleClick="nextStep"
-        v-if="formData.welcome.userType === 'juridica'"
-        :showButton="true"
-      />
-    </div>
+    <StepCpf
+      v-if="currentStep === 1 && formData.welcome.userType === 'fisica'"
+      :data="formData.cpf"
+      :previousButtonClick="prevStep"
+      :nextButtonClick="nextStep"
+      :showButton="true"
+    />
+
+    <StepCnpj
+      :data="formData.cnpj"
+      :handleClick="nextStep"
+      v-if="currentStep === 1 && formData.welcome.userType === 'juridica'"
+      :showButton="true"
+    />
 
     <div v-if="currentStep === 2">
       <StepPassword :data="formData.password" :handleClick="nextStep" />
@@ -115,14 +115,6 @@ const prevStep = () => {
     </div>
 
     <div class="buttons">
-      <Button
-        type="button"
-        :customClass="'btn-secondary'"
-        @click="prevStep"
-        v-if="currentStep > 0"
-      >
-        Voltar
-      </Button>
       <Button type="submit" v-if="currentStep === totalSteps - 1">
         Cadastrar
       </Button>
@@ -134,10 +126,5 @@ const prevStep = () => {
 .buttons {
   display: flex;
   gap: 10px;
-}
-.btn-secondary {
-  background-color: #fff;
-  color: orange;
-  border: 1px solid orange;
 }
 </style>
