@@ -1,12 +1,12 @@
 <script setup>
-import Button from "./Button.vue";
-import Title from "./Title.vue";
+import Button from "../Button.vue";
+import Title from "../Title.vue";
 
 defineProps({
   data: {
-    companyName: String,
-    cnpj: String,
-    openDate: String,
+    name: String,
+    cpf: String,
+    birthdate: String,
     phone: String,
   },
   nextButtonClick: Function,
@@ -16,34 +16,36 @@ defineProps({
 </script>
 
 <template>
-  <Title text="Pessoa Jurídica" v-if="showButton" />
+  <Title v-if="showButton" text="Pessoa Física" />
   <div class="input-container">
-    <label for="companyName">Razão social</label>
+    <label for="nome">Nome</label>
     <input
       type="text"
-      v-model="data.companyName"
-      id="companyName"
-      placeholder="Razão social da empresa"
+      v-model="data.name"
+      id="nome"
+      placeholder="Digite seu nome"
     />
   </div>
   <div class="input-container">
-    <label for="cnpj">CNPJ</label>
+    <label for="cpf">CPF</label>
     <input
       type="text"
-      v-model="data.cnpj"
-      id="cnpj"
-      placeholder="00.000.000/0000-00"
+      v-model="data.cpf"
+      id="cpf"
+      placeholder="000.000.000-00"
     />
-
-    <label for="openDate">Data de abertura</label>
-    <input type="date" v-model="data.openDate" id="openDate" />
-
+  </div>
+  <div class="input-container">
+    <label for="birthdate">Data de nascimento</label>
+    <input type="date" v-model="data.birthdate" id="birthdate" />
+  </div>
+  <div class="input-container">
     <label for="phone">Telefone</label>
     <input
       type="phone"
       v-model="data.phone"
       id="phone"
-      placeholder="15 0000-0000"
+      placeholder="15 99999-9999"
     />
   </div>
   <div class="buttons" v-if="showButton">
@@ -57,9 +59,7 @@ defineProps({
     <Button
       type="button"
       :handleClick="nextButtonClick"
-      :disabled="
-        !data.companyName || !data.cnpj || !data.openDate || !data.phone
-      "
+      :disabled="!data.name || !data.cpf || !data.birthdate || !data.phone"
     >
       Continuar
     </Button>

@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from "vue";
-import StepWelcome from "./StepWelcome.vue";
-import StepCpf from "./StepCpf.vue";
-import StepCnpj from "./StepCnpj.vue";
-import StepPassword from "./StepPassword.vue";
+import StepWelcome from "./Steps/StepWelcome.vue";
+import StepCpf from "./Steps/StepCpf.vue";
+import StepCnpj from "./Steps/StepCnpj.vue";
+import StepPassword from "./Steps/StepPassword.vue";
 import StepTitle from "./StepTitle.vue";
-import StepConfirmation from "./StepConfirmation.vue";
+import StepConfirmation from "./Steps/StepConfirmation.vue";
 
 const currentStep = ref(0);
 const totalSteps = 4;

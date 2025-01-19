@@ -1,12 +1,12 @@
 <script setup>
-import Button from "./Button.vue";
-import Title from "./Title.vue";
+import Button from "../Button.vue";
+import Title from "../Title.vue";
 
 defineProps({
   data: {
-    name: String,
-    cpf: String,
-    birthdate: String,
+    companyName: String,
+    cnpj: String,
+    openDate: String,
     phone: String,
   },
   nextButtonClick: Function,
@@ -16,36 +16,34 @@ defineProps({
 </script>
 
 <template>
-  <Title v-if="showButton" text="Pessoa Física" />
+  <Title text="Pessoa Jurídica" v-if="showButton" />
   <div class="input-container">
-    <label for="nome">Nome</label>
+    <label for="companyName">Razão social</label>
     <input
       type="text"
-      v-model="data.name"
-      id="nome"
-      placeholder="Digite seu nome"
+      v-model="data.companyName"
+      id="companyName"
+      placeholder="Razão social da empresa"
     />
   </div>
   <div class="input-container">
-    <label for="cpf">CPF</label>
+    <label for="cnpj">CNPJ</label>
     <input
       type="text"
-      v-model="data.cpf"
-      id="cpf"
-      placeholder="000.000.000-00"
+      v-model="data.cnpj"
+      id="cnpj"
+      placeholder="00.000.000/0000-00"
     />
-  </div>
-  <div class="input-container">
-    <label for="birthdate">Data de nascimento</label>
-    <input type="date" v-model="data.birthdate" id="birthdate" />
-  </div>
-  <div class="input-container">
+
+    <label for="openDate">Data de abertura</label>
+    <input type="date" v-model="data.openDate" id="openDate" />
+
     <label for="phone">Telefone</label>
     <input
       type="phone"
       v-model="data.phone"
       id="phone"
-      placeholder="15 99999-9999"
+      placeholder="15 0000-0000"
     />
   </div>
   <div class="buttons" v-if="showButton">
@@ -59,7 +57,9 @@ defineProps({
     <Button
       type="button"
       :handleClick="nextButtonClick"
-      :disabled="!data.name || !data.cpf || !data.birthdate || !data.phone"
+      :disabled="
+        !data.companyName || !data.cnpj || !data.openDate || !data.phone
+      "
     >
       Continuar
     </Button>

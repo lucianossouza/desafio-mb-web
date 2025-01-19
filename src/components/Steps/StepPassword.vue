@@ -1,6 +1,6 @@
 <script setup>
-import Button from "./Button.vue";
-import Title from "./Title.vue";
+import Button from "../Button.vue";
+import Title from "../Title.vue";
 
 defineProps({
   data: {
