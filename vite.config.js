@@ -15,4 +15,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/form.js",
+        assetFileNames: "assets/[name].[ext]",
+        chunkFileNames: "assets/[name].js",
+      },
+    },
+  },
 })
