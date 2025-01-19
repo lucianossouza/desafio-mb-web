@@ -7,6 +7,26 @@
   font-weight: normal;
 }
 
+main {
+  height: 600px;
+  width: 360px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: -12px;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 14px;
+}
+
 input {
   padding: 5px 10px;
   border-radius: 5px;
@@ -14,25 +34,45 @@ input {
 }
 
 label {
-  margin-bottom: 12px;
-  margin-right: 10px;
+  font-size: 14px;
 }
 
 .input-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  gap: 6px;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+button {
+  width: 100%;
+  background-color: orange;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: black;
+  cursor: not-allowed;
 }
 
 @media (min-width: 1024px) {
   body {
     display: flex;
     place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
   }
 }

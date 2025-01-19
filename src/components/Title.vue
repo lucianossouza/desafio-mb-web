@@ -5,15 +5,8 @@
 <script setup>
 defineProps({
   text: {
-      type: String,
-      required: true,
-    },
+    type: String,
+    required: true,
+  },
 });
 </script>
-
-<style scoped>
-h1 {
-  font-size: 24px;
-  color: #333;
-}
-</style>

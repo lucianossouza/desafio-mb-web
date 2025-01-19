@@ -1,5 +1,10 @@
 <template>
-  <button :class="['btn', customClass]" :type="type" @click="handleClick" :disabled="disabled">
+  <button
+    :class="customClass"
+    :type="type"
+    @click="handleClick"
+    :disabled="disabled"
+  >
     <slot />
   </button>
 </template>
@@ -15,23 +20,6 @@ defineProps({
     type: String,
     default: "",
   },
-  disabled: Boolean
+  disabled: Boolean,
 });
 </script>
-
-<style>
-.btn {
-  width: 160px;
-  background-color: orange;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:disabled {
-  background-color: black;
-  cursor: not-allowed;
-}
-</style>

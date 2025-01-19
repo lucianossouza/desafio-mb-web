@@ -1,5 +1,6 @@
 <script setup>
 import Button from "./Button.vue";
+import Title from "./Title.vue";
 
 defineProps({
   data: {
@@ -11,6 +12,7 @@ defineProps({
 </script>
 
 <template>
+  <Title text="Seja bem vindo(a)" />
   <div class="input-container">
     <label for="email">Endereço de e-mail</label>
     <input
@@ -21,8 +23,8 @@ defineProps({
     />
   </div>
 
-  <div class="input-container">
-    <div class="checkbox-container">
+  <div class="checkbox-container">
+    <div>
       <input
         type="radio"
         name="userType"
@@ -33,7 +35,7 @@ defineProps({
       <label for="pessoa-fisica">Pessoa física</label>
     </div>
 
-    <div class="checkbox-container">
+    <div>
       <input
         type="radio"
         name="userType"
@@ -43,13 +45,13 @@ defineProps({
       />
       <label for="pessoa-juridica">Pessoa jurídica</label>
     </div>
-
-    <Button
-      type="button"
-      :handleClick="handleClick"
-      :disabled="!data.userType || !data.email"
-    >
-      Continuar
-    </Button>
   </div>
+
+  <Button
+    type="button"
+    :handleClick="handleClick"
+    :disabled="!data.userType || !data.email"
+  >
+    Continuar
+  </Button>
 </template>
