@@ -24,7 +24,7 @@ defineProps({
   </div>
 
   <div class="checkbox-container">
-    <div>
+    <div class="checkbox">
       <input
         type="radio"
         name="userType"
@@ -35,7 +35,7 @@ defineProps({
       <label for="pessoa-fisica">Pessoa física</label>
     </div>
 
-    <div>
+    <div class="checkbox">
       <input
         type="radio"
         name="userType"

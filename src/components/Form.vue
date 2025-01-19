@@ -4,8 +4,8 @@ import StepWelcome from "./StepWelcome.vue";
 import StepCpf from "./StepCpf.vue";
 import StepCnpj from "./StepCnpj.vue";
 import StepPassword from "./StepPassword.vue";
-import Button from "./Button.vue";
 import StepTitle from "./StepTitle.vue";
+import StepConfirmation from "./StepConfirmation.vue";
 
 const currentStep = ref(0);
 const totalSteps = 4;
@@ -37,7 +37,12 @@ async function handleSubmit() {
     responseMessage.value = result.message;
     isSuccess.value = true;
 
-    formData.value = { name: "", email: "", message: "" };
+    formData.value = {
+      welcome: { email: "", userType: "" },
+      cpf: { name: "", cpf: "", birthdate: "", phone: "" },
+      cnpj: { companyName: "", cnpj: "", openDate: "", phone: "" },
+      password: { password: "" },
+    };
   } catch (error) {
     console.error("Erro ao enviar o formulário:", error);
     responseMessage.value = "Ocorreu um erro ao enviar o formulário.";
@@ -91,35 +96,28 @@ const prevStep = () => {
       :nextButtonClick="nextStep"
     />
 
-    <div v-if="currentStep === 3">
-      <div class="input-container">
-        <label for="email">Endereço de e-mail</label>
-        <input type="email" id="email" :value="formData.welcome.email" />
-      </div>
+    <StepConfirmation
+      v-if="currentStep === 3"
+      :email="formData.welcome.email"
+      :password="formData.password.password"
+      :previousButtonClick="prevStep"
+      :nextButtonClick="nextStep"
+    >
       <StepCpf
-        :data="formData.cpf"
         v-if="formData.welcome.userType === 'fisica'"
+        :data="formData.cpf"
+        :previousButtonClick="prevStep"
+        :nextButtonClick="nextStep"
         :showButton="false"
       />
-      <StepCnpj
-        :data="formData.cnpj"
-        v-if="formData.welcome.userType === 'juridica'"
-        :showButton="false"
-      />
-      <div>
-        <div class="input-container">
-          <label for="password">Sua senha</label>
-          <input
-            id="password"
-            type="password"
-            :value="formData.password.password"
-          />
-        </div>
-      </div>
-    </div>
 
-    <Button type="submit" v-if="currentStep === totalSteps - 1">
-      Cadastrar
-    </Button>
+      <StepCnpj
+        v-if="formData.welcome.userType === 'juridica'"
+        :data="formData.cnpj"
+        :previousButtonClick="prevStep"
+        :nextButtonClick="nextStep"
+        :showButton="false"
+      />
+    </StepConfirmation>
   </form>
 </template>

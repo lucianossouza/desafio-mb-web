@@ -48,6 +48,11 @@ label {
   gap: 24px;
 }
 
+.checkbox {
+  display: flex;
+  gap: 12px;
+}
+
 form {
   display: flex;
   flex-direction: column;

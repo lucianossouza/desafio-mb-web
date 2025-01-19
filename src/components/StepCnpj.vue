@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-  <Title text="Pessoa Jurídica" />
+  <Title text="Pessoa Jurídica" v-if="showButton" />
   <div class="input-container">
     <label for="companyName">Razão social</label>
     <input
@@ -46,7 +46,7 @@ defineProps({
       placeholder="15 0000-0000"
     />
   </div>
-  <div class="buttons">
+  <div class="buttons" v-if="showButton">
     <Button
       type="button"
       :customClass="'btn-secondary'"
@@ -55,7 +55,6 @@ defineProps({
       Voltar
     </Button>
     <Button
-      v-if="showButton"
       type="button"
       :handleClick="nextButtonClick"
       :disabled="
