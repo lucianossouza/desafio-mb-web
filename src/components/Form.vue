@@ -84,9 +84,12 @@ const prevStep = () => {
       :showButton="true"
     />
 
-    <div v-if="currentStep === 2">
-      <StepPassword :data="formData.password" :handleClick="nextStep" />
-    </div>
+    <StepPassword
+      v-if="currentStep === 2"
+      :data="formData.password"
+      :previousButtonClick="prevStep"
+      :nextButtonClick="nextStep"
+    />
 
     <div v-if="currentStep === 3">
       <div class="input-container">
