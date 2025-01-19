@@ -5,6 +5,7 @@ import StepCpf from "./StepCpf.vue";
 import StepCnpj from "./StepCnpj.vue";
 import StepPassword from "./StepPassword.vue";
 import Button from "./Button.vue";
+import StepTitle from "./StepTitle.vue";
 
 const currentStep = ref(0);
 const totalSteps = 4;
@@ -59,13 +60,15 @@ const prevStep = () => {
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <div v-if="currentStep === 0">
-      <h2>Etapa 1 de 4</h2>
-      <StepWelcome :data="formData.welcome" :handleClick="nextStep" />
-    </div>
+    <StepTitle :step="currentStep + 1" :totalSteps="totalSteps" />
+
+    <StepWelcome
+      v-if="currentStep === 0"
+      :data="formData.welcome"
+      :handleClick="nextStep"
+    />
 
     <div v-if="currentStep === 1">
-      <h2>Etapa 2 de 4</h2>
       <StepCpf
         :data="formData.cpf"
         :handleClick="nextStep"
@@ -81,12 +84,10 @@ const prevStep = () => {
     </div>
 
     <div v-if="currentStep === 2">
-      <h2>Etapa 3 de 4</h2>
       <StepPassword :data="formData.password" :handleClick="nextStep" />
     </div>
 
     <div v-if="currentStep === 3">
-      <h2>Etapa 4 de 4</h2>
       <div class="input-container">
         <label for="email">Endereço de e-mail</label>
         <input type="email" id="email" :value="formData.welcome.email" />
