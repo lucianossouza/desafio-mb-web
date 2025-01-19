@@ -27,10 +27,12 @@ defineProps({
   <div class="input-container">
     <label for="cpf">CPF</label>
     <input
-      type="text"
+      type="number"
+      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+      maxlength="14"
       v-model="data.cpf"
       id="cpf"
-      placeholder="000.000.000-00"
+      placeholder="Digite apenas números"
     />
   </div>
   <div class="input-container">
@@ -40,10 +42,12 @@ defineProps({
   <div class="input-container">
     <label for="phone">Telefone</label>
     <input
-      type="phone"
       v-model="data.phone"
       id="phone"
-      placeholder="15 99999-9999"
+      type="number"
+      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+      maxlength="11"
+      placeholder="Digite apenas números"
     />
   </div>
   <div class="buttons" v-if="showButton">
@@ -57,7 +61,14 @@ defineProps({
     <Button
       type="button"
       :handleClick="nextButtonClick"
-      :disabled="!data.name || !data.cpf || !data.birthdate || !data.phone"
+      :disabled="
+        !data.name ||
+        !data.cpf ||
+        !data.birthdate ||
+        !data.phone ||
+        data.phone.length < 8 ||
+        data.cpf.length < 11
+      "
     >
       Continuar
     </Button>

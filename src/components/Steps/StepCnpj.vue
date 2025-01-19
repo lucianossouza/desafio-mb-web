@@ -27,10 +27,12 @@ defineProps({
   <div class="input-container">
     <label for="cnpj">CNPJ</label>
     <input
-      type="text"
+      type="number"
+      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+      maxlength="14"
       v-model="data.cnpj"
       id="cnpj"
-      placeholder="00.000.000/0000-00"
+      placeholder="Digite apenas números"
     />
 
     <label for="openDate">Data de abertura</label>
@@ -38,10 +40,12 @@ defineProps({
 
     <label for="phone">Telefone</label>
     <input
-      type="phone"
       v-model="data.phone"
       id="phone"
-      placeholder="15 0000-0000"
+      type="number"
+      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+      maxlength="11"
+      placeholder="Digite apenas números"
     />
   </div>
   <div class="buttons" v-if="showButton">
@@ -56,7 +60,12 @@ defineProps({
       type="button"
       :handleClick="nextButtonClick"
       :disabled="
-        !data.companyName || !data.cnpj || !data.openDate || !data.phone
+        !data.companyName ||
+        !data.cnpj ||
+        !data.openDate ||
+        !data.phone ||
+        data.phone.length < 8 ||
+        data.cnpj.length < 14
       "
     >
       Continuar
