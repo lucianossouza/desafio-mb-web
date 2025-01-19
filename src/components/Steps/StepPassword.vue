@@ -3,19 +3,27 @@ import Button from "../Button.vue";
 import Title from "../Title.vue";
 
 defineProps({
-  data: {
-    password: String,
+  modelValue: {
+    type: String,
+    default: "",
   },
   nextButtonClick: Function,
   previousButtonClick: Function,
 });
+
+const emit = defineEmits(["update:modelValue"]);
 </script>
 
 <template>
   <Title text="Senha de acesso" />
   <div class="input-container">
     <label for="password">Sua senha</label>
-    <input id="password" type="password" v-model="data.password" />
+    <input
+      id="password"
+      type="password"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
   </div>
   <div class="buttons">
     <Button
@@ -28,7 +36,7 @@ defineProps({
     <Button
       type="button"
       :handleClick="nextButtonClick"
-      :disabled="!data.password"
+      :disabled="!modelValue"
     >
       Continuar
     </Button>

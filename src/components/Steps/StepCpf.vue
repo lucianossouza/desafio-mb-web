@@ -4,10 +4,8 @@ import Title from "../Title.vue";
 
 defineProps({
   data: {
-    name: String,
-    cpf: String,
-    birthdate: String,
-    phone: String,
+    type: Object,
+    default: () => ({ name: "", cpf: "", birthdate: "", phone: "" }),
   },
   nextButtonClick: Function,
   previousButtonClick: Function,

@@ -10,10 +10,17 @@ import StepConfirmation from "./Steps/StepConfirmation.vue";
 const currentStep = ref(0);
 const totalSteps = 4;
 const formData = ref({
-  welcome: { email: "", userType: "" },
-  cpf: { name: "", cpf: "", birthdate: "", phone: "" },
-  cnpj: { companyName: "", cnpj: "", openDate: "", phone: "" },
-  password: { password: "" },
+  email: undefined,
+  userType: undefined,
+  name: undefined,
+  cpf: undefined,
+  birthdate: undefined,
+  phone: undefined,
+  companyName: undefined,
+  cnpj: undefined,
+  openDate: undefined,
+  phone: undefined,
+  password: undefined,
 });
 
 const responseMessage = ref("");
@@ -36,13 +43,6 @@ async function handleSubmit() {
     const result = await response.json();
     responseMessage.value = result.message;
     isSuccess.value = true;
-
-    formData.value = {
-      welcome: { email: "", userType: "" },
-      cpf: { name: "", cpf: "", birthdate: "", phone: "" },
-      cnpj: { companyName: "", cnpj: "", openDate: "", phone: "" },
-      password: { password: "" },
-    };
   } catch (error) {
     console.error("Erro ao enviar o formulário:", error);
     responseMessage.value = "Ocorreu um erro ao enviar o formulário.";
@@ -69,21 +69,21 @@ const prevStep = () => {
 
     <StepWelcome
       v-if="currentStep === 0"
-      :data="formData.welcome"
+      :data="formData"
       :handleClick="nextStep"
     />
 
     <StepCpf
-      v-if="currentStep === 1 && formData.welcome.userType === 'fisica'"
-      :data="formData.cpf"
+      v-if="currentStep === 1 && formData.userType === 'fisica'"
+      :data="formData"
       :previousButtonClick="prevStep"
       :nextButtonClick="nextStep"
       :showButton="true"
     />
 
     <StepCnpj
-      v-if="currentStep === 1 && formData.welcome.userType === 'juridica'"
-      :data="formData.cnpj"
+      v-if="currentStep === 1 && formData.userType === 'juridica'"
+      :data="formData"
       :previousButtonClick="prevStep"
       :nextButtonClick="nextStep"
       :showButton="true"
@@ -91,29 +91,29 @@ const prevStep = () => {
 
     <StepPassword
       v-if="currentStep === 2"
-      :data="formData.password"
+      v-model="formData.password"
       :previousButtonClick="prevStep"
       :nextButtonClick="nextStep"
     />
 
     <StepConfirmation
       v-if="currentStep === 3"
-      :email="formData.welcome.email"
-      :password="formData.password.password"
+      :email="formData.email"
+      :password="formData.password"
       :previousButtonClick="prevStep"
       :nextButtonClick="nextStep"
     >
       <StepCpf
-        v-if="formData.welcome.userType === 'fisica'"
-        :data="formData.cpf"
+        v-if="formData.userType === 'fisica'"
+        :data="formData"
         :previousButtonClick="prevStep"
         :nextButtonClick="nextStep"
         :showButton="false"
       />
 
       <StepCnpj
-        v-if="formData.welcome.userType === 'juridica'"
-        :data="formData.cnpj"
+        v-if="formData.userType === 'juridica'"
+        :data="formData"
         :previousButtonClick="prevStep"
         :nextButtonClick="nextStep"
         :showButton="false"

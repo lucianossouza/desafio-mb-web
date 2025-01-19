@@ -4,8 +4,8 @@ import Title from "../Title.vue";
 
 defineProps({
   data: {
-    email: String,
-    userType: String,
+    type: Object,
+    default: () => ({ userType: "", email: "" }),
   },
   handleClick: Function,
 });
